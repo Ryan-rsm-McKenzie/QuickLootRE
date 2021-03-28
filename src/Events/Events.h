@@ -79,6 +79,39 @@ namespace Events
 		CrosshairRefManager& operator=(CrosshairRefManager&&) = delete;
 
 		void Evaluate(RE::TESObjectREFRPtr a_ref);
+    
+    bool IsMonster(actor)
+    {
+      if(actor->GetRace()->HasKeyword(ActorTypeCreature))
+      {
+        return false
+      }
+      //The keyword "Creatrue" contains some things I want to exclude,
+      //Like giants, so I excplicitly give a list of each race I want to skip
+      //Extremely lazily done, but it should get the job done just fine.
+      else if(actor->GetRace() == DragonRace ||
+              actor->GetRace() == UndeadDragonRace ||
+              actor->GetRace() == DLC1UndeadDragonRace ||
+              actor->GetRace() == DLC2SpectralDragonRace ||
+              actor->GetRace() == ChaurusRace ||
+              actor->GetRace() == ChaurusReaperRace ||
+              actor->GetRace() == DLC1_BF_ChaurusRace ||
+              actor->GetRace() == DLC1_BF_ChaurusRace ||
+              actor->GetRace() == WerewolfBeastRace ||
+              actor->GetRace() == DLC2WerebearBeastRace ||
+              actor->GetRace() == TrollFrostRace ||
+              actor->GetRace() == TrollRace ||
+              actor->GetRace() == DLC1TrollFrostRaceArmored ||
+              actor->GetRace() == DLC1TrollRaceArmored ||
+              actor->GetRace() == DLC2ExpSpiderBaseRace ||
+              actor->GetRace() == DLC2ExpSpiderPackmuleRace ||
+              actor->GetRace() == FrostbiteSpiderRace ||
+              actor->GetRace() == FrostbiteSpiderRaceGiant ||
+              actor->GetRace() == FrostbiteSpiderRaceLarge){
+        return true
+      }
+      return false
+    }
 
 		[[nodiscard]] bool CanOpen(RE::TESObjectREFRPtr a_ref)
 		{
@@ -94,7 +127,9 @@ namespace Events
 
 			if (auto actor = a_ref->As<RE::Actor>(); actor) {
 				if (!actor->IsDead() ||
-					actor->IsSummoned()) {
+					actor->IsSummoned() ||
+          actor->GetRace()->HasKeyword(ActorTypeAnimal)) ||
+          IsMonster(actor) {
 					return false;
 				}
 			}
