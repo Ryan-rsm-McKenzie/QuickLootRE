@@ -97,7 +97,7 @@ namespace Animation
 		{
 			const RE::BSFixedString anim(a_animation);
 			auto original = a_response.GetHandler(anim);
-			a_response.handlerMap.insert_or_assign(
+			a_response.handlerMap.insert(
 				{ std::move(anim),
 					RE::make_smart<AnimHandler>(std::move(original)) });
 		}

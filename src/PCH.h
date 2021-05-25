@@ -87,6 +87,8 @@ namespace stl
 
 	using SKSE::util::to_underlying;
 
+	using nonstd::span;
+
 	namespace detail
 	{
 		template <class, class = void>

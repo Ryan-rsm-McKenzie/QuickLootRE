@@ -2,3 +2,5 @@
 closeInCombat = false	# Automatically closes the loot menu in combat
 closeOnEmpty = true	# Automatically closes the loot menu if the container is empty
 dispelInvis = true	# Dispels invisibility when looting a container
+disableAnimals = false # Disables the loot menu for animals
+disableCorpses = false # Disables the loot menu for corpses. (just to use with containers)
